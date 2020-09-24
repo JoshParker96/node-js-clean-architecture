@@ -4,7 +4,7 @@ const { CitizenController } = require('../../../src/controller/')
 const { HttpResponse, SuccessBody, ErrorBody } = require('../../../src/model/http/')
 const { InternalServerException } = require('../../../src/model/exceptions/')
 
-describe('User Controller Unit Tests', () => {
+describe('Citizen Controller Unit Tests', () => {
   describe('#getAllCitizens()', () => {
     it('isSucessful_returnsCorrectResponse', async () => {
       const citizens = [{name: 'hello'}]
