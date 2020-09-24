@@ -2,11 +2,11 @@ const { HttpResponse , SuccessBody } = require("../model/http/")
 
 module.exports = (citizenService) => {
 
-  const getAllCitizens = (req, res) => {
+  const getAllCitizens = async (req, res) => {
     const successMessage = 'Successfully retrieved all citizens'
     const path = req.path
 
-    return citizenService.getAllCitizens()
+    return await citizenService.getAllCitizens()
       .then(citizens => sendSuccessfulResponse(200, successMessage, citizens))
       .catch(err => res.json(err))
   }
