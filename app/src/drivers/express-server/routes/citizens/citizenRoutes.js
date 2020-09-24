@@ -7,9 +7,7 @@ const { HttpRequest } = require('../../../../model/http/')
 
 router.get('/citizens', async (req, res) => {
   const mockCitizenRepository = {
-    getAll: async () => {
-      return Promise.resolve([{name: 'hello hello hello helloooo'}])
-    }
+    getAll: async () => Promise.resolve([{name: 'hello hello hello helloooo' + Math.random()}])
   }
   const citizenService = CitizenService(mockCitizenRepository)
   const citizenController = CitizenController(citizenService)
