@@ -2,9 +2,9 @@
   "name": "node-js-clean-architecture",
   "version": "1.0.0",
   "description": "",
-  "main": "./app/src/drivers/express-server/app.js",
+  "main": "./app/src/drivers/express-server/server.js",
   "scripts": {
-    "local": "nodemon ./app/src/drivers/express-server/app.js",
+    "local": "nodemon ./app/src/drivers/express-server/server.js",
     "test": "mocha app/test/**/*.js"
   },
   "keywords": [],
