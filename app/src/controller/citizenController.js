@@ -2,7 +2,7 @@ const { HttpResponse , SuccessBody } = require("../model/http/")
 
 module.exports = (citizenService) => {
 
-  const getAllCitizens = async (req, res) => {
+  const getAllCitizens = async (req) => {
     const successMessage = 'Successfully retrieved all citizens'
     const path = req.path
 

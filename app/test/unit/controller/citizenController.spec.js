@@ -19,7 +19,7 @@ describe('User Controller', () => {
     const req = { path: '/citizens' }
 
     const citizenController = CitizenController(mockUserService)
-    const actual = await citizenController.getAllCitizens(req, {})
+    const actual = await citizenController.getAllCitizens(req)
     
     assert.deepEqual(actual, expected)
   })

@@ -1,16 +1,19 @@
 const express = require('express')
-const { CitizenController } = require('../../../../controller/')
 const router = express.Router()
+
+const { CitizenController } = require('../../../../controller/')
+const { HttpRequest } = require('../../../../model/http/')
 
 router.get('/citizens', async (req, res) => {
   const mockUserService = {
     getAllCitizens: async () => {
-      return Promise.resolve([{name: 'hello hello hello'}])
+      return Promise.resolve([{name: 'hello hello hello hellooooo'}])
     }
   }
   const citizensController = CitizenController(mockUserService)
-  const response = await citizensController.getAllCitizens(req, res)
-  res.status(200).send(response)
+  const httpRequest = new HttpRequest(req.body, req.headers, req.path)
+  const response = await citizensController.getAllCitizens(httpRequest)
+  res.status(response.statusCode).send(response).headers(response.headers)
 })
 
 module.exports = router
