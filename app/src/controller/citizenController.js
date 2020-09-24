@@ -1,19 +1,28 @@
-const { HttpResponse , SuccessBody } = require("../model/http/")
+const { HttpResponse , SuccessBody, ErrorBody } = require("../model/http/")
+const { InternalServerException } = require("../model/exceptions")
 
 module.exports = (citizenService) => {
 
   const getAllCitizens = async (req) => {
     const successMessage = 'Successfully retrieved all citizens'
-    const path = req.path
 
     return await citizenService.getAllCitizens()
       .then(citizens => sendSuccessfulResponse(200, successMessage, citizens))
-      .catch(err => res.json(err))
+      .catch(err => sendUnSuccessfulResponse(err, req))
   }
 
-  const sendSuccessfulResponse = async (statusCode, message, data) => {
+  const sendSuccessfulResponse = (statusCode, message, data) => {
     const successBody = new SuccessBody(true, message, data)
-    return Promise.resolve(new HttpResponse(statusCode, {}, successBody))
+    const headers = [{'Content-Type': 'application/json'}]
+    return new HttpResponse(statusCode, headers, successBody)
+  }
+
+  const sendUnSuccessfulResponse = (err, req) => {
+    if (err instanceof InternalServerException) {
+      const errorBody = new ErrorBody(false, err.message, 'detailed message', req.path)
+      const headers = [{'Content-Type': 'application/json'}]
+      return new HttpResponse(500, headers, errorBody)
+    }
   }
 
   return {
